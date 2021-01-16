@@ -1,0 +1,43 @@
+body{
+    background-color: black;
+}
+
+.main-header {
+    font-family: 'Cinzel', serif;
+    color: white;
+    font-size: 100px;
+    text-align: center;
+    margin: 100px;
+}
+
+#piano {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.white-key{
+    width: 70px;
+    height: 500px;
+    background-color: #d15757;
+    margin: 10px;
+}
+
+.black-key{
+    width: 0px;
+    height: 500px;
+    overflow: visible;
+    z-index: 100;
+}
+
+.black-key div{
+    width: 50px;
+    height: 400px;
+    background-color: #dd9336;
+    transform: translateX(-35px);
+    border: solid orange 5px;
+}
+
+.active {
+    background-color: rgb(139, 241, 255) !important;
+}
