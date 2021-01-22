@@ -7,7 +7,74 @@ body{
     color: white;
     font-size: 80px;
     text-align: center;
-    margin: 70px;
+    margin: 40px;
+}
+
+.header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.options-wrapper {
+}
+
+.type-selection {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.type-selection .option {
+    font-family: 'Cinzel', serif;
+    padding: 3px;
+    padding-bottom: 5px;
+    cursor: pointer;
+    transition: 0.5s;
+    font-size: 8px;
+    font-weight: 400;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+    border-bottom-right-radius: 30px;
+    border-top-left-radius: 30px;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin: 5px;
+}
+
+.type-selection .option:not(.active) {
+    color: white;
+}
+
+.type-selection .option .active {
+    background-color: rgb(139, 241, 255);
+    color: black !important;
+}
+
+.type-selection .option:not(.active):hover {
+    background-color: white;
+    color: black;
+}
+
+.option-slider {
+    font-family: 'Cinzel', serif;
+    padding: 5px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 8px;
+    color: white;
+    border-bottom: 1px solid white;
+}
+
+.option-slider .title{
+    width: 60px;
+}
+
+.option-slider input{
+    width: 100px;
 }
 
 #piano {

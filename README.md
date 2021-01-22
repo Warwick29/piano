@@ -1,10 +1,10 @@
 # README #
 
-A simple Piano
+OSCILATOR
 
 ### References ###
 
-* this repository build on top of this sound library
+* this repository builds on top of this sound library
 * https://tonejs.github.io/
 
 ### What is this repository for? ###

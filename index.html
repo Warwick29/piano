@@ -10,7 +10,24 @@
     <script src="simpleTones.js"></script>
 </head>
 <body>
-    <div class = "main-header">o s c i l a t e</div>
+    <div class = "header-wrapper">
+        <div class = "main-header">o s c i l a t e</div>
+        <div class = "options-wrapper">
+            <div class = "type-selection">
+                <div class = "option active" id = "option_sawtooth">Saw Tooth</div>
+                <div class = "option" id = "option_sine">Sine</div>
+                <div class = "option" id = "option_square">Square</div>
+            </div>
+            <div class = "option-slider">
+                <div class = "title">Modulation</div>
+                <input id = "option_modulation" type = "range" min = "0" max = "20">
+            </div>
+            <div class = "option-slider">
+                <div class = "title">Levels</div>
+                <input id = "option_levels" type = "range" min = "1" max = "8">
+            </div>
+        </div>
+    </div>
     <div id = "piano">
         <div class = "white-key" id = "C3_key"></div>
         <div class = "black-key"><div id = "C#3_key"></div></div>
@@ -48,6 +65,7 @@
         <div class = "white-key" id = "A5_key"></div>
     </div>
     <script src="tools.js"></script>
+    <script src = "noteFunctions.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

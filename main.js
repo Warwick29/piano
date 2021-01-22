@@ -7,36 +7,57 @@ const active_notes = {}
 
 let held_keys = []
 
+
+let CURRENT_MODE = "spread"
+
+let CURRENT_TYPE = "sawtooth"
+
+let CURRENT_MODULATION = 1
+
+let CURRENT_LEVELS = 5
+
+let maintain = false
+
+const toggleMode = (mode, bool) => Modes[mode] = bool
+
+const setMaintain = bool => maintain = bool
+
 notes_arr.forEach(note => {
     const dom_element = document.getElementById(`${note}_key`)
     dom_notes[note] = dom_element
 })
 
+const stopNote = note_str => {
+    if(active_notes[note_str]) {
+        if(active_notes[note_str].length) {active_notes[note_str].forEach(note => {
+            if(maintain){setTimeout(()=>{note.stop()}, 1000)}else{note.stop()}
+        })}
+        else {if(maintain){setTimeout(()=>{note.stop()}, 1000)}else{note.stop()}}
+    }
+}
+
 const sound = note_str => {
-    //playTone(tone[note_str], "square", 10)
     const is_held = held_keys.indexOf(note_str) > -1
     if(is_held) {return} else {held_keys.push(note_str)}
-    const audio_node = playSound("sawtooth", tone[note_str], 1)
-    if(active_notes[note_str]) {
-        active_notes[note_str].stop()
-    }
+    const audio_node = noteFunctions[CURRENT_MODE](note_str, CURRENT_TYPE, CURRENT_MODULATION, CURRENT_LEVELS)
+    stopNote(note_str)
     active_notes[note_str] = audio_node
     dom_notes[note_str].classList.add('active')
 }
+
 const end = note_str => {
     const held_index = held_keys.indexOf(note_str)
     if(held_index > -1) {
         held_keys.splice(held_index, 1)
     }
-    if(active_notes[note_str]) {
-        active_notes[note_str].stop()
-    }
+    stopNote(note_str)
     dom_notes[note_str].classList.remove('active')
 }
 
 window.addEventListener("keydown", (ev) => {
     ev.preventDefault()
     switch(ev.key) {
+        case 'Tab' : return setMaintain(true)
         case 'q': return sound('C3')
         case '2': return sound('C#3')
         case 'w': return sound('D3')
@@ -77,6 +98,7 @@ window.addEventListener("keydown", (ev) => {
 window.addEventListener("keyup", (ev) => {
     ev.preventDefault()
     switch(ev.key) {
+        case 'Tab' : return setMaintain(false)
         case 'q': return end('C3')
         case '2': return end('C#3')
         case 'w': return end('D3')
@@ -112,4 +134,40 @@ window.addEventListener("keyup", (ev) => {
         case ';': return end('G#5')
         case '\/': return end('A5')
     }
+})
+
+const option_dom = {
+    types: {
+        sine: document.getElementById('option_sine'),
+        sawtooth: document.getElementById('option_sawtooth'),
+        square: document.getElementById('option_square')
+    }
+}
+
+const toggleActive = (option_section, target) => {
+    Object.keys(option_section).forEach(option => {
+        option_section[option].classList.remove('active')
+    })
+    option_section[target].classList.add('active')
+}
+
+document.getElementById('option_sine').addEventListener("click", () => {
+    CURRENT_TYPE = "sine"
+    toggleActive(option_dom.types, "sine")
+})
+document.getElementById('option_sawtooth').addEventListener("click", () => {
+    CURRENT_TYPE = "sawtooth"
+    toggleActive(option_dom.types, "sawtooth")
+})
+document.getElementById('option_square').addEventListener("click", () => {
+    CURRENT_TYPE = "square"
+    toggleActive(option_dom.types, "square")
+})
+
+document.getElementById("option_modulation").addEventListener("change", function() {
+    CURRENT_MODULATION = this.value / 10
+})
+
+document.getElementById("option_levels").addEventListener("change", function() {
+    CURRENT_LEVELS = this.value
 })
